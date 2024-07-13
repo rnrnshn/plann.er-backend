@@ -14,6 +14,7 @@ export async function createTrip(app: FastifyInstance) {
       })
     }
   }, async (request) => {
+    // save the trip data into the request body
     const { destination, starts_at, ends_at } = request.body
 
     // validate starts date 
@@ -26,6 +27,7 @@ export async function createTrip(app: FastifyInstance) {
       throw new Error('Invalid trip end date.')
     }
 
+    // create trip on the db
     const trip = await prisma.trip.create({
       data: {
         destination,
